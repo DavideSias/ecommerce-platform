@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('costumer_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->decimal('tot_price', 7, 2);
             $table->string('note');
             $table->timestamps();

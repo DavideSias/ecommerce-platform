@@ -6,9 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
-    public function users(){
+    public function user(){
 
-        return $this->hasMany('App/User');
+        return $this->belongsTo('App/User');
 
     }
+
+    public function items(){
+
+        return $this->hasMany('App/Item');
+
+    }
+
 }

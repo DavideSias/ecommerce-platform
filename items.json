@@ -1,0 +1,82 @@
+[
+      {
+        "seller_id": 1,
+        "name": "Maglietta a righe",
+        "description": "Una maglietta a righe casual per tutti i giorni",
+        "price": 19.99,
+        "visible": true,
+        "quantity": 10,
+        "color": "blu",
+        "size": "M"
+      },
+      {
+        "seller_id": 2,
+        "name": "Camicia formale",
+        "description": "Una camicia formale per occasioni speciali",
+        "price": 49.99,
+        "visible": true,
+        "quantity": 5,
+        "color": "bianco",
+        "size": "L"
+      },
+      {
+        "seller_id": 1,
+        "name": "Jeans skinny",
+        "description": "Jeans skinny adatti per un look trendy",
+        "price": 39.99,
+        "visible": true,
+        "quantity": 15,
+        "color": "nero",
+        "size": "S"
+      },
+      {
+        "seller_id": 2,
+        "name": "Gonna a pieghe",
+        "description": "Una gonna a pieghe perfetta per l'estate",
+        "price": 29.99,
+        "visible": true,
+        "quantity": 8,
+        "color": "rosa",
+        "size": "M"
+      },
+      {
+        "seller_id": 1,
+        "name": "Camicia a quadri",
+        "description": "Una camicia a quadri trendy per ogni occasione",
+        "price": 34.99,
+        "visible": true,
+        "quantity": 12,
+        "color": "rosso",
+        "size": "L"
+      },
+      {
+        "seller_id": 2,
+        "name": "Pantaloni cargo",
+        "description": "Pantaloni cargo comodi con tasche multiple",
+        "price": 42.99,
+        "visible": true,
+        "quantity": 6,
+        "color": "verde",
+        "size": "XL"
+      },
+      {
+        "seller_id": 1,
+        "name": "Vestito estivo",
+        "description": "Un vestito leggero e estivo con stampa floreale",
+        "price": 59.99,
+        "visible": true,
+        "quantity": 3,
+        "color": "giallo",
+        "size": "S"
+      },
+      {
+        "seller_id": 2,
+        "name": "Felpa con cappuccio",
+        "description": "Una felpa con cappuccio morbida e calda",
+        "price": 45.99,
+        "visible": true,
+        "quantity": 9,
+        "color": "grigio",
+        "size": "M"
+      }
+]

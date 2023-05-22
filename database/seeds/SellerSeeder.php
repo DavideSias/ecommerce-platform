@@ -1,5 +1,6 @@
 <?php
 
+use App\Seller;
 use Illuminate\Database\Seeder;
 
 class SellerSeeder extends Seeder
@@ -13,21 +14,25 @@ class SellerSeeder extends Seeder
     {
         $sellers = [
             [
-                'user_id' => 2,
-                'name' => 'DaMichele',
-                'slug'=> 'damichele',
+                'user_id' => 1,
+                'name' => 'Michele Shop',
+                'slug'=> 'michele-shop',
                 'vat_number' => '11111111111',
-                'logo_image' =>
-                'cover_image' =>
+                'logo_image' => 'https://picsum.photos/id/237/200/300',
+                'cover_image' => 'https://picsum.photos/id/1/200/300',
             ],
             [
-                'user_id' => 3,
-                'name' =>
-                'slug'=>
-                'vat_number' =>
-                'logo_image' =>
-                'cover_image' =>
+                'user_id' => 2,
+                'name' => 'Davide Shop',
+                'slug'=> 'davide-shop',
+                'vat_number' => '11111111112',
+                'logo_image' => 'https://picsum.photos/id/19/200/300',
+                'cover_image' => 'https://picsum.photos/id/20/200/300',
             ]
-        ]
+        ];
+
+        foreach($sellers as $seller){
+            Seller::create($seller);
+        }
     }
 }

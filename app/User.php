@@ -38,19 +38,19 @@ class User extends Authenticatable
     ];
 
     public function roles(){
-        return $this->belongsToMany('App/Role');
+        return $this->belongsToMany('App\Role');
 
     }
 
     public function seller(){
 
-        return $this->hasOne('App/Seller');
+        return $this->hasOne('App\Seller');
 
     }
 
     public function customer(){
 
-        return $this->hasOne('App/Customer');
+        return $this->hasOne('App\Customer');
 
     }
 }

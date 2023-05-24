@@ -7,24 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     public function seller(){
-        return $this->belongsTo('App/Seller');
+        return $this->belongsTo('App\Seller');
     }
 
     public function albums(){
 
-        return $this->hasMany('App/Album');
+        return $this->hasMany('App\Album');
 
     }
 
     public function categories(){
 
-        return $this->belongsToMany('App/Category');
+        return $this->belongsToMany('App\Category');
 
     }
 
     public function orders(){
 
-        return $this->belongsToMany('App/Order');
+        return $this->belongsToMany('App\Order');
 
     }
 }

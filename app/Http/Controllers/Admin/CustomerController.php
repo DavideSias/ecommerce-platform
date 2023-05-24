@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Customer;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
+    private $validations = [
+        'first_name'        => 'required|max:50|string',
+        'last_name'         => 'required|max:50|string',
+        'address'           => 'required|string',
+        'phone_number'      => 'required|numeric|unique:customers',
+        // 'vat_number' => ['required', 'numeric', 'digits:11', 'unique:users'],
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +34,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.customer.create');
     }
 
     /**
@@ -36,7 +45,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validations);
+        $data = $request->all();
+
+        $customer = new Customer();
+        $customer->user_id = Auth::user()->id;
+        $customer->first_name = $data['first_name'];
+        $customer->last_name = $data['last_name'];
+        $customer->address = $data['address'];
+        $customer->phone_number = $data['phone_number'];
+        $customer->save();
+
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -47,7 +67,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+
     }
 
     /**

@@ -8,11 +8,11 @@ class Customer extends Model
 {
     public function orders(){
 
-        return $this->hasMany('App/Order');
+        return $this->hasMany('App\Order');
 
     }
 
     public function user(){
-        return $this->belongsTo('App/User');
+        return $this->belongsTo(User::class);
     }
 }

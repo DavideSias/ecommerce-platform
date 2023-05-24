@@ -8,13 +8,13 @@ class Order extends Model
 {
     public function items(){
 
-        return $this->belongsToMany('App/Item');
+        return $this->belongsToMany('App\Item');
 
     }
 
     public function customer(){
 
-        return $this->belongsTo('App/Customer');
+        return $this->belongsTo('App\Customer');
 
     }
 }

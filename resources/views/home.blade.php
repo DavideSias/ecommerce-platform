@@ -14,8 +14,15 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Grazie per esserti registrato!') }}
+                       <a href="{{ route('admin.customer.create')}}">Completa profilo</a>
                 </div>
+                <ul>
+                    <li>{{ $customer->first_name }}</li>
+                    <li>{{ $customer->last_name }}</li>
+                    <li>{{ $customer->address }}</li>
+                    <li>{{ $customer->phone_number }}</li>
+                </ul>
             </div>
         </div>
     </div>

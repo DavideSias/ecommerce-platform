@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,6 @@ Route::middleware('auth')
 ->name('admin.')
 ->prefix('admin')
 ->group(function () {
+Route::resource('customer', 'CustomerController');
 Route::get('/', 'AdminController@index')->name('home');
 });

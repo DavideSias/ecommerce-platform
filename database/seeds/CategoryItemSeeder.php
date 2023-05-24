@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategoryItemSeeder extends Seeder
 {
@@ -11,6 +12,52 @@ class CategoryItemSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $category_items = [
+            [
+                'category_id' => '9',
+                'item_id' => '2',
+            ],
+            [
+                'category_id' => '9',
+                'item_id' => '5',
+            ],
+            [
+                'category_id' => '9',
+                'item_id' => '1',
+            ],
+            [
+                'category_id' => '7',
+                'item_id' => '6',
+            ],
+            [
+                'category_id' => '7',
+                'item_id' => '3',
+            ],
+            [
+                'category_id' => '7',
+                'item_id' => '4',
+            ],
+            [
+                'category_id' => '9',
+                'item_id' => '7',
+            ],
+            [
+                'category_id' => '10',
+                'item_id' => '7',
+            ],
+            [
+                'category_id' => '6',
+                'item_id' => '8',
+            ],
+            [
+                'category_id' => '5',
+                'item_id' => '8',
+            ],
+
+        ];
+
+        foreach($category_items as $category_item){
+            DB::table('category_item')->insert($category_item);
+        }
     }
 }

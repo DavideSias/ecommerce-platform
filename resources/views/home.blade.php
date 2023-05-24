@@ -15,14 +15,20 @@
                     @endif
 
                     {{ __('Grazie per esserti registrato!') }}
-                       <a href="{{ route('admin.customer.create')}}">Completa profilo</a>
+                    @if($customer == null)
+                    <a href="{{ route('admin.customer.create')}}">Completa profilo</a>
+                    @endif
                 </div>
+                @if($customer != null)
+                <div>Profilo completo</div>
                 <ul>
                     <li>{{ $customer->first_name }}</li>
                     <li>{{ $customer->last_name }}</li>
                     <li>{{ $customer->address }}</li>
                     <li>{{ $customer->phone_number }}</li>
                 </ul>
+                <a href="{{ route('admin.customer.edit', ['customer' => $customer])}}">Modifica dati profilo</a>
+                @endif
             </div>
         </div>
     </div>

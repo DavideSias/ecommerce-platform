@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +15,6 @@ class CustomerController extends Controller
         'last_name'         => 'required|max:50|string',
         'address'           => 'required|string',
         'phone_number'      => 'required|numeric|unique:customers',
-        // 'vat_number' => ['required', 'numeric', 'digits:11', 'unique:users'],
     ];
 
     /**
@@ -45,6 +45,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate($this->validations);
         $data = $request->all();
 
@@ -78,7 +79,11 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        if(Auth::id() !== $customer->user_id){
+            return view('auth.error')->withErrors('You cannot do that');
+        } else{
+        return view('admin.customer.edit', compact('customer'));
+         }
     }
 
     /**
@@ -90,7 +95,28 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+
+        $request->validate([
+            'first_name'    => 'required|max:50|string',
+            'last_name'     => 'required|max:50|string',
+            'address'       => 'required|string',
+            'phone_number'  => [
+                'required',
+                'numeric',
+                Rule::unique('customers')->ignore($customer->id),
+            ],
+        ]);
+
+        $data = $request->all();
+
+        $customer->user_id = Auth::user()->id;
+        $customer->first_name = $data['first_name'];
+        $customer->last_name = $data['last_name'];
+        $customer->address = $data['address'];
+        $customer->phone_number = $data['phone_number'];
+        $customer->save();
+
+        return redirect()->route('admin.home');
     }
 
     /**

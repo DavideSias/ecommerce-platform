@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -15,7 +16,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $customer = $user->customer;
+        $orders = Order::where('customer_id', $customer->id)->get();
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**

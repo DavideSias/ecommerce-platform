@@ -29,5 +29,6 @@ Route::middleware('auth')
 ->prefix('admin')
 ->group(function () {
 Route::resource('customer', 'CustomerController');
+Route::resource('orders', 'OrderController');
 Route::get('/', 'AdminController@index')->name('home');
 });

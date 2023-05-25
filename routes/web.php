@@ -28,8 +28,10 @@ Route::middleware('auth')
 ->name('admin.')
 ->prefix('admin')
 ->group(function () {
+Route::get('/orders/indexSeller', 'OrderController@indexSeller')->name('orders.indexSeller');
 Route::resource('customer', 'CustomerController');
 Route::resource('orders', 'OrderController');
 Route::get('/', 'AdminController@index')->name('home');
 Route::get('/orders', 'OrderController@indexCustomer')->name('orders.indexCustomer');
 });
+

@@ -29,13 +29,8 @@ class OrderController extends Controller
     }
     public function indexSeller()
     {
-        $user = Auth::user();
-        $seller = $user->seller;
-        if ($seller->order != null) {
-            $orders = Order::where('seller_id', $seller->id)->get();
-            return view('admin.orders.index', compact('orders'));
-        }
 
+        return view('admin.orders.indexSeller');
     }
 
     /**

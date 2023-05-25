@@ -31,4 +31,5 @@ Route::middleware('auth')
 Route::resource('customer', 'CustomerController');
 Route::resource('orders', 'OrderController');
 Route::get('/', 'AdminController@index')->name('home');
+Route::get('/orders', 'OrderController@indexCustomer')->name('orders.indexCustomer');
 });

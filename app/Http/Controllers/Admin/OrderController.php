@@ -14,12 +14,28 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexCustomer()
     {
         $user = Auth::user();
         $customer = $user->customer;
-        $orders = Order::where('customer_id', $customer->id)->get();
-        return view('admin.orders.index', compact('orders'));
+        $orders = null;
+        if (Order::where('customer_id', $customer)->exists()) {
+            $orders = Order::where('customer_id', $customer->id)->get();
+            return view('admin.orders.indexCustomer', compact('orders'));
+        }else {
+            return view('admin.orders.indexCustomer', compact('orders'));
+        }
+
+    }
+    public function indexSeller()
+    {
+        $user = Auth::user();
+        $seller = $user->seller;
+        if ($seller->order != null) {
+            $orders = Order::where('seller_id', $seller->id)->get();
+            return view('admin.orders.index', compact('orders'));
+        }
+
     }
 
     /**

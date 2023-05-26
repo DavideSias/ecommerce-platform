@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +19,10 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $customer = $user->customer;
+        //dd($customer);
+
         $orders = null;
-        if (Order::where('customer_id', $customer)->exists()) {
+        if ($customer != null && $customer->orders != null) {
             $orders = Order::where('customer_id', $customer->id)->get();
             return view('admin.orders.indexCustomer', compact('orders'));
         }else {
@@ -29,8 +32,26 @@ class OrderController extends Controller
     }
     public function indexSeller()
     {
+        $user = Auth::user();
+        $seller = $user->seller;
+        $orders = null;
 
-        return view('admin.orders.indexSeller');
+        if($seller != null){
+
+            $orders = DB::table('orders')
+            ->select(DB::raw('COUNT(order_id) as order_id, orders.note, orders.tot_price, orders.created_at, orders.customer_id'))
+            ->join('item_order','orders.id','=','item_order.order_id')
+            ->join('items','item_id','=','items.id')
+            ->where('seller_id','=',$seller->id)
+            ->groupBy('order_id')
+            ->get();
+
+            return view('admin.orders.indexSeller', compact('orders'));
+        } else {
+            return view('admin.orders.indexSeller', compact('orders'));
+        }
+
+
     }
 
     /**

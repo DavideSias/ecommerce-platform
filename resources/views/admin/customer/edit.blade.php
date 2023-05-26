@@ -24,7 +24,7 @@
                 <div class="invalid-feedback">
                     @error('last_name')
                         <ul>
-                            @foreach ($errors->get('first_name') as $error)
+                            @foreach ($errors->get('last_name') as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>

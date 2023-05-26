@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
 {
+    private $validations = [
+        'name'             => 'required|max:50|string',
+        'logo_image'       => 'url',
+        'cover_image'      => 'url',
+        'vat_number'       => 'required|numeric|digits:11|unique:sellers',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +24,11 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $seller = $user->seller;
+        return view('admin.seller.index', [
+            'seller' => $seller,
+        ]);
     }
 
     /**
@@ -25,7 +38,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.seller.create');
     }
 
     /**
@@ -36,7 +49,19 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validations);
+        $data = $request->all();
+
+        $seller = new Seller();
+        $seller->user_id = Auth::user()->id;
+        $seller->name = $data['name'];
+        $seller->slug = Seller::getSlug($data['name']);
+        $seller->vat_number = $data['vat_number'];
+        $seller->logo_image = $data['logo_image'];
+        $seller->cover_image = $data['cover_image'];
+        $seller->save();
+
+        return redirect()->route('admin.seller.index');
     }
 
     /**
@@ -58,7 +83,11 @@ class SellerController extends Controller
      */
     public function edit(Seller $seller)
     {
-        //
+        if(Auth::id() !== $seller->user_id){
+            return view('auth.error')->withErrors('You cannot do that');
+        } else{
+        return view('admin.seller.edit', compact('seller'));
+        }
     }
 
     /**
@@ -70,7 +99,29 @@ class SellerController extends Controller
      */
     public function update(Request $request, Seller $seller)
     {
-        //
+        $request->validate([
+            'name'             => 'required|max:50|string',
+            'logo_image'       => 'url',
+            'cover_image'      => 'url',
+            'vat_number'       => [
+                'required',
+                'numeric',
+                'digits:11',
+                Rule::unique('sellers')->ignore($seller->id),
+            ],
+        ]);
+
+        $data = $request->all();
+
+        $seller->user_id = Auth::user()->id;
+        $seller->name = $data['name'];
+        $seller->slug = Seller::getSlug($data['name']);
+        $seller->logo_image = $data['logo_image'];
+        $seller->cover_image = $data['cover_image'];
+        $seller->vat_number = $data['vat_number'];
+        $seller->save();
+
+        return redirect()->route('admin.seller.index');
     }
 
     /**
